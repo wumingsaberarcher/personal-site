@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { HegemonyCrest } from './HegemonyCrest'
+import { useLocale } from '../i18n/LocaleContext'
 
 const SESSION_KEY = 'tl-signal-intro-seen'
 
@@ -23,6 +24,7 @@ export function shouldShowBootIntro(): boolean {
 type Props = { onFinished: () => void }
 
 export function BootIntro({ onFinished }: Props) {
+  const { t } = useLocale()
   const [phase, setPhase] = useState<Phase>('assemble')
   const done = useRef(false)
 
@@ -59,7 +61,7 @@ export function BootIntro({ onFinished }: Props) {
       className={`boot-intro phase-${phase}`}
       role="dialog"
       aria-modal="true"
-      aria-label="Signal station boot sequence"
+      aria-label={t.boot.aria}
     >
       <div className="boot-void" aria-hidden="true" />
       <div className="boot-door boot-door-left" aria-hidden="true">
@@ -81,13 +83,13 @@ export function BootIntro({ onFinished }: Props) {
         <div className="boot-mark-wrap">
           <HegemonyCrest animated className="boot-crest" />
         </div>
-        <p className="boot-kicker">Operator crest · locking signal</p>
+        <p className="boot-kicker">{t.boot.kicker}</p>
         <p className="boot-title">TIANCHENG LI</p>
-        <p className="boot-wait">Establishing uplink…</p>
+        <p className="boot-wait">{t.boot.wait}</p>
       </div>
 
       <button type="button" className="boot-skip" onClick={finish}>
-        Skip →
+        {t.boot.skip}
       </button>
     </div>
   )

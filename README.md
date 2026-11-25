@@ -9,6 +9,8 @@ Single-page Outer Wilds–leaning site for NZ recruiters.
 - `#operator` — About / dossier
 - `#uplink` — Contact + resume
 
+EN / 中文 toggle in the top bar (persists in localStorage). Resume PDF switches with locale.
+
 Canal / DeepSeek UI = phase 2 (not in v1).
 
 ## Dev

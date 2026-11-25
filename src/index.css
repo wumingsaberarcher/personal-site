@@ -9,7 +9,28 @@
   --font-display: 'Orbitron', system-ui, sans-serif;
   --font-body: 'Space Grotesk', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --font-cjk: 'Noto Sans SC', 'Microsoft YaHei UI', 'PingFang SC', sans-serif;
   color-scheme: dark;
+}
+
+html[lang='zh-CN'] {
+  --font-body: var(--font-cjk), 'Space Grotesk', system-ui, sans-serif;
+}
+
+html[lang='zh-CN'] body {
+  font-family: var(--font-body);
+}
+
+html[lang='zh-CN'] .headline,
+html[lang='zh-CN'] .signal-support,
+html[lang='zh-CN'] .operator-body,
+html[lang='zh-CN'] .relic-line,
+html[lang='zh-CN'] .dossier-main,
+html[lang='zh-CN'] .dossier-sub,
+html[lang='zh-CN'] .availability,
+html[lang='zh-CN'] .btn {
+  font-family: var(--font-body);
+  letter-spacing: 0.01em;
 }
 
 *,

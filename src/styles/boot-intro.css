@@ -401,3 +401,63 @@
 .site-topbar-nav a:hover {
   color: var(--signal);
 }
+
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.28rem;
+  margin-left: 0.85rem;
+  padding: 0.28rem 0.55rem;
+  border: 1px solid color-mix(in srgb, var(--signal) 35%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--panel) 72%, transparent);
+  backdrop-filter: blur(8px);
+  pointer-events: auto;
+}
+
+.lang-btn {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  padding: 0.1rem 0.2rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  color: var(--fog);
+  line-height: 1;
+}
+
+.lang-btn.is-active {
+  color: var(--signal);
+  font-weight: 600;
+}
+
+.lang-btn:hover {
+  color: var(--white);
+}
+
+.lang-sep {
+  color: color-mix(in srgb, var(--fog) 55%, transparent);
+  font-size: 0.65rem;
+  user-select: none;
+}
+
+html[lang='zh-CN'] .site-topbar-nav a {
+  text-transform: none;
+  letter-spacing: 0.04em;
+}
+
+@media (max-width: 720px) {
+  .site-topbar-brand {
+    display: none;
+  }
+
+  .site-topbar-nav {
+    gap: 0.65rem;
+  }
+
+  .lang-switch {
+    margin-left: 0.35rem;
+    padding: 0.24rem 0.45rem;
+  }
+}

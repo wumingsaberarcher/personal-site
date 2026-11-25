@@ -1,8 +1,12 @@
+import { useLocale } from '../i18n/LocaleContext'
+
 export function Uplink() {
+  const { t } = useLocale()
+
   return (
-    <section id="uplink" className="section uplink" aria-label="Uplink">
-      <p className="kicker">03 / Uplink</p>
-      <h2 className="headline">Let&apos;s build what&apos;s next.</h2>
+    <section id="uplink" className="section uplink" aria-label={t.uplink.aria}>
+      <p className="kicker">{t.uplink.kicker}</p>
+      <h2 className="headline">{t.uplink.headline}</h2>
       <a className="uplink-email" href="mailto:tli637@aucklanduni.ac.nz">
         tli637@aucklanduni.ac.nz ↗
       </a>
@@ -17,14 +21,14 @@ export function Uplink() {
         >
           LinkedIn ↗
         </a>
-        <a href="/resume/Li_Tiancheng_Resume.pdf" target="_blank" rel="noreferrer">
-          Resume PDF ↗
+        <a href={t.resumeHref} target="_blank" rel="noreferrer">
+          {t.uplink.resume}
         </a>
       </div>
-      <p className="phase-note">DeepSeek uplink — phase 2</p>
+      <p className="phase-note">{t.uplink.phaseNote}</p>
       <footer className="uplink-foot">
         <span className="brand-foot">TIANCHENG LI</span>
-        <span>AUCKLAND NZ · 2026</span>
+        <span>{t.uplink.foot}</span>
       </footer>
     </section>
   )

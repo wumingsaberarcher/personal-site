@@ -1,11 +1,14 @@
 import { HegemonyCrest } from './HegemonyCrest'
+import { useLocale } from '../i18n/LocaleContext'
 
 export function Signal() {
+  const { t } = useLocale()
+
   return (
-    <section id="signal" className="section signal" aria-label="Signal">
+    <section id="signal" className="section signal" aria-label={t.signal.aria}>
       <div className="signal-stage">
         <div className="signal-copy">
-          <p className="kicker">Signal · Operator Station</p>
+          <p className="kicker">{t.signal.kicker}</p>
           <div className="brand-row">
             <div className="mark mark-crest" aria-hidden="true">
               <HegemonyCrest />
@@ -13,24 +16,22 @@ export function Signal() {
             <h1 className="brand">TIANCHENG LI</h1>
           </div>
           <p className="headline signal-headline">
-            Always building.
+            {t.signal.headline1}
             <br />
-            <span className="line-forward">Always forward.</span>
+            <span className="line-forward">{t.signal.headline2}</span>
           </p>
-          <p className="signal-support">
-            Final-year CS @ UoA · Auckland · full-stack &amp; games
-          </p>
+          <p className="signal-support">{t.signal.support}</p>
           <div className="actions">
             <a className="btn btn-primary" href="#relics">
-              View relics ↓
+              {t.signal.viewRelics}
             </a>
             <a
               className="btn btn-ghost"
-              href="/resume/Li_Tiancheng_Resume.pdf"
+              href={t.resumeHref}
               target="_blank"
               rel="noreferrer"
             >
-              Resume PDF ↗
+              {t.signal.resume}
             </a>
           </div>
         </div>

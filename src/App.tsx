@@ -6,10 +6,13 @@ import { Operator } from './components/Operator'
 import { Uplink } from './components/Uplink'
 import { BootIntro, shouldShowBootIntro } from './components/BootIntro'
 import { HegemonyCrest } from './components/HegemonyCrest'
+import { LangSwitch } from './components/LangSwitch'
+import { LocaleProvider, useLocale } from './i18n/LocaleContext'
 import './styles/site.css'
 import './styles/boot-intro.css'
 
-export default function App() {
+function Station() {
+  const { t } = useLocale()
   const [intro, setIntro] = useState(() => shouldShowBootIntro())
   const [topbarOn, setTopbarOn] = useState(() => !shouldShowBootIntro())
 
@@ -25,12 +28,13 @@ export default function App() {
       <header className={`site-topbar${topbarOn ? ' is-on' : ''}`}>
         <HegemonyCrest className="site-topbar-crest" />
         <span className="site-topbar-brand">TIANCHENG LI</span>
-        <nav className="site-topbar-nav" aria-label="Section">
-          <a href="#signal">Signal</a>
-          <a href="#relics">Relics</a>
-          <a href="#operator">Operator</a>
-          <a href="#uplink">Uplink</a>
+        <nav className="site-topbar-nav" aria-label={t.nav.aria}>
+          <a href="#signal">{t.nav.signal}</a>
+          <a href="#relics">{t.nav.relics}</a>
+          <a href="#operator">{t.nav.operator}</a>
+          <a href="#uplink">{t.nav.uplink}</a>
         </nav>
+        <LangSwitch />
       </header>
 
       <Starfield />
@@ -41,5 +45,13 @@ export default function App() {
         <Uplink />
       </main>
     </div>
+  )
+}
+
+export default function App() {
+  return (
+    <LocaleProvider>
+      <Station />
+    </LocaleProvider>
   )
 }
