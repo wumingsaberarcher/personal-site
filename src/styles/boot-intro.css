@@ -1,0 +1,403 @@
+.boot-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: grid;
+  place-items: center;
+  color: var(--white);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.boot-intro.phase-exit {
+  pointer-events: none;
+  animation: boot-fade-out 0.5s ease forwards;
+}
+
+@keyframes boot-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+.boot-void {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 50% 40% at 50% 45%, rgba(64, 217, 198, 0.1), transparent 60%),
+    radial-gradient(ellipse 40% 30% at 70% 70%, rgba(242, 115, 56, 0.08), transparent 55%),
+    #05080f;
+}
+
+/* Mechanical bay doors */
+.boot-door {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 52%;
+  z-index: 2;
+  transition: transform 0.85s cubic-bezier(0.7, 0.05, 0.25, 1);
+  will-change: transform;
+}
+
+.boot-door-left {
+  left: 0;
+  transform: translateX(0);
+  border-right: 1px solid color-mix(in srgb, var(--signal) 35%, transparent);
+}
+
+.boot-door-right {
+  right: 0;
+  transform: translateX(0);
+  border-left: 1px solid color-mix(in srgb, var(--signal) 35%, transparent);
+}
+
+.boot-intro.phase-doors .boot-door-left,
+.boot-intro.phase-exit .boot-door-left {
+  transform: translateX(-102%);
+}
+
+.boot-intro.phase-doors .boot-door-right,
+.boot-intro.phase-exit .boot-door-right {
+  transform: translateX(102%);
+}
+
+.boot-door-face {
+  height: 100%;
+  background:
+    linear-gradient(90deg, #0a1016 0%, #12181e 45%, #0d1319 100%);
+  box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.55);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 8% 6%;
+  position: relative;
+}
+
+.boot-door-left .boot-door-face {
+  background:
+    linear-gradient(90deg, #0a1016 0%, #12181e 55%, #0e141b 100%);
+  border-right: 3px solid color-mix(in srgb, var(--signal) 40%, transparent);
+}
+
+.boot-door-right .boot-door-face {
+  background:
+    linear-gradient(270deg, #0a1016 0%, #12181e 55%, #0e141b 100%);
+  border-left: 3px solid color-mix(in srgb, var(--signal) 40%, transparent);
+}
+
+.boot-door-rib {
+  display: block;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--signal) 35%, transparent),
+    transparent
+  );
+  opacity: 0.7;
+}
+
+.boot-door-face::before,
+.boot-door-face::after {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border: 1.5px solid color-mix(in srgb, var(--ember) 55%, transparent);
+  opacity: 0.6;
+}
+
+.boot-door-left .boot-door-face::before {
+  top: 16px;
+  right: 16px;
+  border-left: 0;
+  border-bottom: 0;
+}
+
+.boot-door-left .boot-door-face::after {
+  bottom: 16px;
+  right: 16px;
+  border-left: 0;
+  border-top: 0;
+}
+
+.boot-door-right .boot-door-face::before {
+  top: 16px;
+  left: 16px;
+  border-right: 0;
+  border-bottom: 0;
+}
+
+.boot-door-right .boot-door-face::after {
+  bottom: 16px;
+  left: 16px;
+  border-right: 0;
+  border-top: 0;
+}
+
+/* Center stage / crest */
+.boot-stage {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.65rem;
+  text-align: center;
+  transition:
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.5s ease;
+}
+
+.boot-intro.phase-rise .boot-stage,
+.boot-intro.phase-doors .boot-stage,
+.boot-intro.phase-exit .boot-stage {
+  transform: translateY(calc(-42vh + 2.2rem)) scale(0.34);
+}
+
+.boot-intro.phase-doors .boot-kicker,
+.boot-intro.phase-doors .boot-title,
+.boot-intro.phase-doors .boot-wait,
+.boot-intro.phase-exit .boot-kicker,
+.boot-intro.phase-exit .boot-title,
+.boot-intro.phase-exit .boot-wait {
+  opacity: 0;
+}
+
+.boot-mark-wrap {
+  width: min(42vw, 220px);
+  aspect-ratio: 200 / 240;
+  color: #d8e4ea;
+  filter: drop-shadow(0 12px 28px rgba(64, 217, 198, 0.22));
+}
+
+.boot-crest {
+  width: 100%;
+  height: 100%;
+  color: #e8eef2;
+}
+
+.hegemony-crest .crest-fill {
+  fill: currentColor;
+}
+
+.hegemony-crest .crest-fuller {
+  stroke: #05080f;
+  stroke-width: 1.6;
+  fill: none;
+  opacity: 0.55;
+}
+
+/* Crest assembly timeline (matches BootIntro phase timers) */
+.crest-anim .crest-disc-left,
+.crest-anim .crest-disc-right {
+  transform-origin: 100px 118px;
+  transform-box: fill-box;
+  opacity: 0;
+  animation: crest-disc-in 0.45s ease forwards;
+}
+
+.crest-anim .crest-disc-left {
+  animation-delay: 0.05s;
+}
+
+.crest-anim .crest-disc-right {
+  animation-delay: 0.05s;
+}
+
+.crest-anim .crest-sword {
+  transform-origin: 100px 44px;
+  opacity: 0;
+  transform: translateY(-70px);
+  animation: crest-sword-drop 0.55s cubic-bezier(0.2, 0.9, 0.3, 1) 0.4s forwards;
+}
+
+.crest-anim .crest-disc-left {
+  animation:
+    crest-disc-in 0.45s ease 0.05s forwards,
+    crest-split-left 0.4s ease 0.7s forwards;
+}
+
+.crest-anim .crest-disc-right {
+  animation:
+    crest-disc-in 0.45s ease 0.05s forwards,
+    crest-split-right 0.4s ease 0.7s forwards;
+}
+
+/* After sword lands: reveal laurels from guard (base) → leaf tips (down/out) */
+.crest-anim .crest-laurel-left,
+.crest-anim .crest-laurel-right {
+  /* hide everything below the guard first; then open downward */
+  clip-path: inset(0 0 100% 0);
+  animation: crest-laurel-reveal 0.85s ease 1.05s forwards;
+}
+
+@keyframes crest-disc-in {
+  from {
+    opacity: 0;
+    transform: scale(0.55);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes crest-sword-drop {
+  0% {
+    opacity: 0;
+    transform: translateY(-70px);
+  }
+  70% {
+    opacity: 1;
+    transform: translateY(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes crest-split-left {
+  to {
+    transform: translateX(-7px);
+  }
+}
+
+@keyframes crest-split-right {
+  to {
+    transform: translateX(7px);
+  }
+}
+
+@keyframes crest-laurel-reveal {
+  /* 0% clipped from bottom = only guard-side visible first, then full wrap */
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+.boot-kicker {
+  margin: 0.4rem 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--signal);
+  opacity: 0;
+  animation: boot-text-in 0.4s ease 1.15s forwards;
+  transition: opacity 0.35s ease;
+}
+
+.boot-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  opacity: 0;
+  animation: boot-text-in 0.45s ease 1.25s forwards;
+  transition: opacity 0.35s ease;
+}
+
+.boot-wait {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fog);
+  opacity: 0;
+  animation: boot-text-in 0.4s ease 1.35s forwards;
+  transition: opacity 0.35s ease;
+}
+
+@keyframes boot-text-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.boot-skip {
+  position: absolute;
+  z-index: 5;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  border: none;
+  background: transparent;
+  color: var(--fog);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding: 0.5rem 0.25rem;
+}
+
+.boot-skip:hover {
+  color: var(--signal);
+}
+
+/* Persistent header crest after intro */
+.site-topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem clamp(1rem, 4vw, 2rem);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity 0.45s ease 0.15s, transform 0.45s ease 0.15s;
+}
+
+.site-topbar.is-on {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.site-topbar-crest {
+  width: 2.1rem;
+  height: 2.5rem;
+  color: #e8eef2;
+  filter: drop-shadow(0 4px 12px rgba(64, 217, 198, 0.2));
+}
+
+.site-topbar-brand {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  color: color-mix(in srgb, var(--white) 80%, transparent);
+}
+
+.site-topbar-nav {
+  margin-left: auto;
+  display: flex;
+  gap: 1rem;
+}
+
+.site-topbar-nav a {
+  pointer-events: auto;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fog);
+}
+
+.site-topbar-nav a:hover {
+  color: var(--signal);
+}

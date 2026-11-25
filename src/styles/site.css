@@ -1,0 +1,653 @@
+.station {
+  position: relative;
+  isolation: isolate;
+  overflow-x: clip;
+  min-height: 100dvh;
+  /* One continuous void — sections do NOT paint their own page backgrounds */
+  background:
+    radial-gradient(ellipse 70% 50% at 15% 12%, rgba(64, 217, 198, 0.1), transparent 55%),
+    radial-gradient(ellipse 55% 40% at 88% 28%, rgba(242, 115, 56, 0.08), transparent 58%),
+    radial-gradient(ellipse 60% 45% at 50% 72%, rgba(64, 217, 198, 0.05), transparent 60%),
+    linear-gradient(180deg, #05080f 0%, #0a0e12 40%, #0c0a08 100%);
+}
+
+.starfield {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.85;
+}
+
+.station > main {
+  position: relative;
+  z-index: 1;
+}
+
+.section {
+  position: relative;
+  width: min(1440px, 100%);
+  margin-inline: auto;
+  padding: clamp(3.5rem, 9vh, 6rem) clamp(1.25rem, 6vw, 7.5rem);
+  background: transparent;
+}
+
+.kicker {
+  margin: 0 0 0.85rem;
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--signal);
+}
+
+.headline {
+  margin: 0;
+  font-family: var(--font-body);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.muted {
+  color: var(--fog);
+}
+
+/* —— Signal —— */
+.signal {
+  min-height: 100dvh;
+  display: grid;
+  align-items: center;
+  background: transparent;
+  padding-top: clamp(5rem, 12vh, 7rem);
+}
+
+.signal-stage {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  align-items: center;
+}
+
+.signal-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.85rem;
+  max-width: 36rem;
+}
+
+.brand-row {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+}
+
+.mark {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 0.9rem;
+  display: grid;
+  place-items: center;
+  background: color-mix(in srgb, var(--panel) 88%, transparent);
+  border: 1px solid color-mix(in srgb, var(--signal) 55%, transparent);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #e8eef2;
+  box-shadow: 0 10px 28px rgba(64, 217, 198, 0.18);
+}
+
+.mark-crest {
+  padding: 0.35rem;
+}
+
+.mark-crest .hegemony-crest {
+  width: 100%;
+  height: 100%;
+}
+
+.brand {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.signal-headline {
+  font-size: clamp(2.4rem, 6vw, 3.6rem);
+}
+
+.signal-headline .line-forward {
+  color: var(--signal);
+}
+
+.signal-support {
+  margin: 0;
+  font-size: clamp(1rem, 1.8vw, 1.125rem);
+  color: var(--fog);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-top: 0.75rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 1.4rem;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: 1px solid transparent;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn-primary {
+  background: var(--signal);
+  color: var(--void);
+  box-shadow: 0 10px 32px rgba(64, 217, 198, 0.28);
+  animation: cta-pulse 3.2s ease-in-out infinite;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--signal);
+  border-color: color-mix(in srgb, var(--signal) 55%, transparent);
+}
+
+@keyframes cta-pulse {
+  0%,
+  100% {
+    box-shadow: 0 10px 28px rgba(64, 217, 198, 0.22);
+  }
+  50% {
+    box-shadow: 0 12px 36px rgba(64, 217, 198, 0.38);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-primary {
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+  .relic-plate {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+.signal-visual {
+  position: relative;
+  min-height: min(52vh, 420px);
+  display: grid;
+  place-items: center;
+}
+
+.orbit,
+.orbit-inner {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px dashed color-mix(in srgb, var(--signal) 28%, transparent);
+  animation: spin 22s linear infinite;
+}
+
+.orbit {
+  width: min(72%, 360px);
+  aspect-ratio: 1;
+}
+
+.orbit-inner {
+  width: min(48%, 240px);
+  aspect-ratio: 1;
+  border-color: color-mix(in srgb, var(--ember) 30%, transparent);
+  animation-duration: 14s;
+  animation-direction: reverse;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.core-mark {
+  position: relative;
+  z-index: 1;
+  width: 10rem;
+  height: 10rem;
+  border-radius: 2.4rem;
+  display: grid;
+  place-items: center;
+  background: color-mix(in srgb, var(--panel) 90%, transparent);
+  border: 1.5px solid color-mix(in srgb, var(--signal) 45%, transparent);
+  font-family: var(--font-display);
+  font-size: 2.6rem;
+  font-weight: 700;
+  color: #e8eef2;
+  box-shadow: 0 16px 40px rgba(64, 217, 198, 0.22);
+}
+
+.core-crest {
+  padding: 1.1rem;
+}
+
+.core-crest .hegemony-crest {
+  width: 100%;
+  height: 100%;
+}
+
+/* —— Relics: AoTD-style overlapping plates —— */
+.relics {
+  background: transparent;
+  padding-bottom: 2rem;
+}
+
+.relics-head {
+  padding-bottom: 0.5rem;
+}
+
+.relics-head .headline {
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+}
+
+.relic-stack {
+  width: min(1440px, 100%);
+  margin-inline: auto;
+  padding: 1rem clamp(1rem, 4vw, 5rem) 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(3rem, 7vh, 5rem);
+}
+
+.relic-plate {
+  position: relative;
+  opacity: 0;
+  transition:
+    opacity 0.7s ease,
+    transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.relic-plate.from-left {
+  transform: translateX(-4.5rem);
+}
+
+.relic-plate.from-right {
+  transform: translateX(4.5rem);
+}
+
+.relic-plate.is-in {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.relic-plate-rail {
+  position: absolute;
+  top: 8%;
+  bottom: 8%;
+  width: 4px;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    var(--signal) 20%,
+    var(--signal) 80%,
+    transparent
+  );
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.relic-plate.from-left .relic-plate-rail {
+  left: 0;
+}
+
+.relic-plate.from-right .relic-plate-rail {
+  right: 0;
+}
+
+.relic-plate-inner {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 0;
+  align-items: stretch;
+  position: relative;
+}
+
+.relic-plate-inner.flip {
+  grid-template-columns: 0.95fr 1.05fr;
+}
+
+.relic-plate-inner.flip .relic-shot-stack {
+  order: 2;
+}
+
+.relic-plate-inner.flip .relic-info-box {
+  order: 1;
+}
+
+.relic-shot-stack {
+  position: relative;
+  z-index: 1;
+  padding: 1.25rem 0.75rem;
+}
+
+.relic-shot-shadow {
+  position: absolute;
+  inset: 1.75rem 1.25rem 0.5rem;
+  background: color-mix(in srgb, var(--void-deep) 70%, transparent);
+  transform: translate(14px, 16px);
+  z-index: 0;
+  clip-path: polygon(0 0, calc(100% - 28px) 0, 100% 28px, 100% 100%, 28px 100%, 0 calc(100% - 28px));
+}
+
+.relic-shot-box {
+  position: relative;
+  z-index: 1;
+  background: var(--panel);
+  border: 1px solid color-mix(in srgb, var(--signal) 45%, transparent);
+  clip-path: polygon(0 0, calc(100% - 28px) 0, 100% 28px, 100% 100%, 28px 100%, 0 calc(100% - 28px));
+  overflow: hidden;
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.45);
+}
+
+.relic-shot-box img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  display: block;
+}
+
+.relic-info-box {
+  position: relative;
+  z-index: 2;
+  margin: 2.25rem -1.25rem;
+  padding: 1.5rem 1.6rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-items: flex-start;
+  background:
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--panel) 94%, transparent) 0%,
+      color-mix(in srgb, #0d141a 92%, transparent) 100%
+    );
+  border: 1px solid color-mix(in srgb, var(--signal) 40%, transparent);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(6px);
+}
+
+.relic-plate.from-left .relic-info-box {
+  margin-left: -2.5rem;
+}
+
+.relic-plate.from-right .relic-info-box {
+  margin-right: -2.5rem;
+}
+
+.relic-title {
+  margin: 0;
+  font-size: clamp(1.55rem, 3vw, 2rem);
+  font-weight: 700;
+}
+
+.relic-line {
+  margin: 0;
+  color: var(--fog);
+  font-size: 0.98rem;
+  max-width: 36rem;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.chip {
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--signal) 35%, transparent);
+  background: color-mix(in srgb, var(--panel) 90%, transparent);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--signal);
+}
+
+.relic-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.1rem;
+  margin-top: 0.25rem;
+}
+
+.relic-links a {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  color: var(--white);
+  border-bottom: 1px solid color-mix(in srgb, var(--signal) 45%, transparent);
+}
+
+.relic-links a:hover {
+  color: var(--signal);
+}
+
+.corner {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border: 1.5px solid var(--signal);
+  pointer-events: none;
+  opacity: 0.75;
+}
+
+.corner.tl {
+  top: 6px;
+  left: 6px;
+  border-right: 0;
+  border-bottom: 0;
+}
+
+.corner.tr {
+  top: 6px;
+  right: 6px;
+  border-left: 0;
+  border-bottom: 0;
+}
+
+.corner.bl {
+  bottom: 6px;
+  left: 6px;
+  border-right: 0;
+  border-top: 0;
+}
+
+.corner.br {
+  bottom: 6px;
+  right: 6px;
+  border-left: 0;
+  border-top: 0;
+}
+
+.relic-shot-box .corner {
+  opacity: 0.9;
+}
+
+/* —— Operator —— */
+.operator {
+  background: transparent;
+}
+
+.operator .headline {
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  max-width: 20ch;
+}
+
+.operator-body {
+  margin: 1rem 0 1.5rem;
+  max-width: 46rem;
+  color: var(--fog);
+  font-size: 1.05rem;
+}
+
+.dossier {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  width: fit-content;
+  max-width: 100%;
+  padding: 1.25rem 1.5rem;
+  border-radius: 0.15rem;
+  background: color-mix(in srgb, var(--panel) 88%, transparent);
+  border: 1px solid color-mix(in srgb, var(--signal) 28%, transparent);
+  backdrop-filter: blur(6px);
+  position: relative;
+}
+
+.dossier-label {
+  margin: 0 0 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  color: var(--signal);
+}
+
+.dossier-main {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.dossier-sub {
+  margin: 0.35rem 0 0;
+  font-size: 0.85rem;
+  color: var(--fog);
+}
+
+.availability {
+  display: inline-flex;
+  margin-top: 1.25rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.15rem;
+  border: 1px solid color-mix(in srgb, var(--ember) 55%, transparent);
+  background: color-mix(in srgb, var(--panel) 82%, transparent);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--ember);
+  backdrop-filter: blur(6px);
+}
+
+/* —— Uplink —— */
+.uplink {
+  background: transparent;
+  padding-bottom: clamp(3rem, 8vh, 5rem);
+}
+
+.uplink .headline {
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+}
+
+.uplink-email {
+  display: inline-block;
+  margin: 1rem 0 1.1rem;
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  font-weight: 700;
+  color: var(--signal);
+}
+
+.uplink-email:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.uplink-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.uplink-links a {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--fog);
+}
+
+.uplink-links a:hover {
+  color: var(--signal);
+}
+
+.phase-note {
+  margin: 0 0 2rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: color-mix(in srgb, var(--fog) 70%, transparent);
+}
+
+.uplink-foot {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid color-mix(in srgb, var(--fog) 25%, transparent);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--fog);
+  letter-spacing: 0.06em;
+}
+
+.uplink-foot .brand-foot {
+  font-family: var(--font-display);
+}
+
+@media (max-width: 900px) {
+  .signal-stage,
+  .relic-plate-inner,
+  .relic-plate-inner.flip,
+  .dossier {
+    grid-template-columns: 1fr;
+  }
+
+  .relic-plate-inner.flip .relic-shot-stack,
+  .relic-plate-inner.flip .relic-info-box {
+    order: unset;
+  }
+
+  .relic-plate.from-left .relic-info-box,
+  .relic-plate.from-right .relic-info-box {
+    margin: 0.5rem 0 0;
+  }
+
+  .relic-shot-stack {
+    padding: 0;
+  }
+
+  .relic-plate-rail {
+    display: none;
+  }
+
+  .signal-visual {
+    order: -1;
+    min-height: 240px;
+  }
+
+  .core-mark {
+    width: 7.5rem;
+    height: 7.5rem;
+    font-size: 2rem;
+    border-radius: 1.8rem;
+  }
+}
